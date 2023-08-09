@@ -136,3 +136,5 @@ dist
 .env
 
 /dist
+
+ecosystem.config.js
