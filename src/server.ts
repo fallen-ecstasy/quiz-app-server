@@ -1,7 +1,10 @@
+import cors from "cors";
 import "dotenv/config";
 import express, { Express, Request, Response } from "express";
 import morgan from "morgan";
-import cors from "cors";
+import connectDB from "./db/connectDB";
+import questionRouter from "./routers/questionsRouter";
+import resultsRouter from "./routers/resultsRouter";
 
 const server:Express = express();
 const port = process.env.PORT ?? 6000;
@@ -13,7 +16,7 @@ server.use(morgan('tiny'));
 
 // Cors
 server.use(cors({
-    origin:"http://localhost:4444",
+    origin:`http://localhost:${port}`,
     credentials : true,
 }))
 
@@ -23,6 +26,10 @@ server.use(express.json());
 
 
 /* MIDDLEWARE END */
+
+connectDB();
+
+server.use('/api',questionRouter,resultsRouter);
 
 server.get('/',(req:Request, res:Response):void =>{
     res.send("HELLO WORLD from QUIZZER SERVER");
