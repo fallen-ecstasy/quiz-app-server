@@ -6,7 +6,11 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/server.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\""
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
+    "prod": "pm2 start ecosystem.config.js --name Quiz-App-API --env production",
+    "test": "pm2 start ecosystem.config.js --name Quiz-App-API-TEST --env development",
+    "stopprod":"pm2 stop Quiz-App-API",
+    "stoptest":"pm2 stop Quiz-App-API-TEST"
   },
   "author": "HARSH MISRA",
   "license": "ISC",

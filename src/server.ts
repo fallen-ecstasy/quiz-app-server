@@ -16,7 +16,7 @@ server.use(morgan('tiny'));
 
 // Cors
 server.use(cors({
-    origin:`http://localhost:${port}`,
+    origin:"http://localhost:4444",
     credentials : true,
 }))
 
@@ -24,12 +24,13 @@ server.use(cors({
 server.use(express.json());
 
 
+connectDB();
 
 /* MIDDLEWARE END */
 
-connectDB();
 
-server.use('/api',questionRouter,resultsRouter);
+server.use('/api',questionRouter);
+server.use('/api',resultsRouter);
 
 server.get('/',(req:Request, res:Response):void =>{
     res.send("HELLO WORLD from QUIZZER SERVER");
