@@ -1,11 +1,16 @@
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
+import mongoose, { ConnectOptions } from 'mongoose';
 
 dotenv.config();
 
+const {DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME} = process.env;
 
 export default async function connectDB() {
     await mongoose.connect(
-        "mongodb://localhost:27017/test"
+        `mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
+        {
+            useNewUrlParser :true,
+            useUnifiedTopology : true
+        } as ConnectOptions
     ).then(()=> console.log("DATABASE CONNECTED!"));
 }
